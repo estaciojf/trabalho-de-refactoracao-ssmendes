@@ -32,9 +32,11 @@ public class IniitController implements ActionListener {
 	private void abrirCadastroView() {
 		cadastroView = new CadastroLivroView();
 		cadastroView.setVisible(true);
+		
+		abrirExibirView();
 	}
 	
-	private void abrirExibirView() {
+	public void abrirExibirView() {
 		LivroDAO livroDao;
 		try {
 			livroDao = new LivroDAO();

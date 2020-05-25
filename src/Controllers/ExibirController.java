@@ -1,5 +1,7 @@
 package Controllers;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -7,35 +9,41 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import DAO.LivroDAO;
+import Listeners.TableLivroListener;
 import Models.Livro;
 
-public class ExibirController {
 
-//	MOCK
-//	public String column[]={"ID","NAME","SALARY"}; 
-//	public String data[][] = { {"101","Amit","670000"},    
-//            {"102","Jai","780000"},    
-//            {"101","Sachin","700000"}};   
 
+
+public class ExibirController implements ActionListener {
 	
 	private JTable table;
-	public String column[]={"Título","Autor", "Genero", "Ano", "Já Leu?"};         
+	public String column[]={"Título","Autor", "Genero", "Ano", "Já Leu?"};  
+	DefaultTableModel model;
 
 	public ExibirController(JTable table) {
 		this.table = table;
+		this.model = (DefaultTableModel) table.getModel();
+		this.setTableColumns();
 		this.getLivros();
+		
+		
+		TableLivroListener tableListener = new TableLivroListener();
+		
+		table.getModel().addTableModelListener(tableListener);
+	}
+	
+	private void setTableColumns() {
+		for (String columnName : this.column) {
+			model.addColumn(columnName);
+		}
 	}
 	
 	public String getLivros() {
 		
-		DefaultTableModel model = (DefaultTableModel) table.getModel();
-	
+		this.model.setRowCount(0);
 		
-		for (String columnName : this.column) {
-			model.addColumn(columnName);
-		}
-		
-		
+
 		try {
 			LivroDAO livroDao = new LivroDAO();
 			List<Livro> list = livroDao.getAllLivros();
@@ -58,5 +66,13 @@ public class ExibirController {
 		
 	}
 
-	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+		this.getLivros();
+		
+	}
 }
+
+

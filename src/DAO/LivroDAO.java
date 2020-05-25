@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.Random;
 
 import Models.Livro;
 
@@ -25,7 +26,8 @@ public class LivroDAO {
 		String dburl = "jdbc:mysql://localhost:3306/locadora";
 		
 		myConn = DriverManager.getConnection(dburl, user, password);
-		
+			
+				
 		System.out.print("Conectado!");
 	}
 	
@@ -38,7 +40,7 @@ public class LivroDAO {
 		
 		myStat = myConn.createStatement();
 		myResult = myStat.executeQuery("SELECT * FROM Livros");
-		
+				
 		while (myResult.next()) {
 			Livro tempLivro = new Livro(
 					myResult.getString("title"),
@@ -50,6 +52,14 @@ public class LivroDAO {
 			
 			list.add(tempLivro);
 		}
+		
+
+		Random random = new Random();
+		int randomize = random.nextInt(list.size() - 1);
+		
+		list.get(randomize).getAuthor();
+		
+		
 		
 		myStat.close();
 		return list;
