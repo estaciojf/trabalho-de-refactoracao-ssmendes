@@ -21,14 +21,14 @@ public class ExibirController implements ActionListener {
 	public String column[]={"Título","Autor", "Genero", "Ano", "Já Leu?"};  
 	DefaultTableModel model;
 
-	public ExibirController(JTable table) {
+	public ExibirController(JTable table) throws SQLException {
 		this.table = table;
 		this.model = (DefaultTableModel) table.getModel();
 		this.setTableColumns();
 		this.getLivros();
 		
 		
-		TableLivroListener tableListener = new TableLivroListener();
+		TableLivroListener tableListener = new TableLivroListener(table);
 		
 		table.getModel().addTableModelListener(tableListener);
 	}
@@ -53,7 +53,7 @@ public class ExibirController implements ActionListener {
 						livro.getTitle(),
 						livro.getAuthor(),
 						livro.getGender(),
-						livro.getAuthor(),
+						livro.getYear(),
 						livro.isRead()
 				});
 			}

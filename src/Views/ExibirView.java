@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
@@ -89,7 +90,12 @@ public class ExibirView extends JFrame {
 		table = new JTable();
 
 				
-		ExibirController handle = new ExibirController(table);
+		try {
+			ExibirController handle = new ExibirController(table);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		
 		
