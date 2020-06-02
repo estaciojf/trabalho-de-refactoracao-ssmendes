@@ -43,14 +43,15 @@ public class CadastroLivroController implements ActionListener {
 		this.comboYear = comboYear;
 		
 		int anoAtual = Calendar.getInstance().get(Calendar.YEAR); 
-		for (int yearLoop = anoAtual ; yearLoop >= 1980 ; yearLoop --) {
+		
+		for (int yearLoop = anoAtual ; yearLoop >= 1900 ; yearLoop --) {
 			this.comboYear.addItem(yearLoop);
 		}
 	}
 	
 	private void populateComboGener(JComboBox comboGender) {
 		this.comboGender = comboGender;
-		String[] genders = new String[] { "Terror", "Ficção", "Drama", "Aventura" };
+		String[] genders = new String[] { "Terror", "Ficção", "Drama", "Aventura", "Comédia", "Técnico" };
 		for (String genderLoop : genders) {
 			this.comboGender.addItem(genderLoop);
 		}

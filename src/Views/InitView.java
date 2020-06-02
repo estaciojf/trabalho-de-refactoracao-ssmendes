@@ -11,6 +11,9 @@ import Controllers.IniitController;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
@@ -41,7 +44,7 @@ public class InitView extends JFrame {
 	 * Create the frame.
 	 */
 	public InitView() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -65,7 +68,18 @@ public class InitView extends JFrame {
 		
 		
 		IniitController handle = new IniitController(cadastroView);
+
+		
+
+		
+		handle.abrirExibirView();
+		
+		
+		
+		
+		
 		btnCadastrar.addActionListener(handle);
 		btnExibir.addActionListener(handle);
 	}
+	
 }

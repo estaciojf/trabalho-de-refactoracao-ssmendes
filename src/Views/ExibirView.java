@@ -8,14 +8,21 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Controllers.ExibirController;
+import Listeners.TableLivroListener;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
+import java.awt.Image;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.event.ActionEvent;
 
 public class ExibirView extends JFrame {
 
@@ -67,11 +74,30 @@ public class ExibirView extends JFrame {
 		JButton btnBuscar = new JButton("Buscar");
 		panel.add(btnBuscar);
 		
+		JButton btnRefresh = new JButton("");
+		
+
+		panel.add(btnRefresh);
+		
+		ImageIcon iconButton = new ImageIcon("/Users/leandrosimoes/Desktop/refresh_icon.png");
+		Image imageIcon = iconButton.getImage();
+		Image imageButton = imageIcon.getScaledInstance(12, 12, java.awt.Image.SCALE_SMOOTH);
+		
+		btnRefresh.setIcon(new ImageIcon(imageButton));
+		
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		table = new JTable();
 
-		ExibirController handle = new ExibirController(table);
+				
+		try {
+			ExibirController handle = new ExibirController(table);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
 		
 		scrollPane.setViewportView(table);
 	}
